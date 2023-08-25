@@ -200,7 +200,7 @@ Function Set-LogicAppDeployment {
 
     $logicAppResource = Set-LogicAppResource `
         -resourceGroupName $resourceGroupName `
-        -logicAppName $logicAppName #$connectorsOutput.Outputs.logicAppName.Value`
+        -logicAppName $logicAppName `
         -armParameters $armParameters;
     
     Write-Host "Updating token values with output values"
@@ -462,5 +462,6 @@ if ($resourceProviders.length) {
 
 # Create the logic apps
 For ($i = 1; $i -le $instanceCount; $i++) {
+    Write-Host "Instance count " $($instanceCount)
     Set-LogicAppDeployment -instance $i;
 }
