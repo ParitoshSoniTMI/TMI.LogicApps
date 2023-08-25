@@ -7,7 +7,7 @@ variables:
   sampleDirectory: tmi.logicapps
   sharedResourceGroupIdentifier: shared
 parameters:
-  - name: LogicApp
+  - name: logicapp
     displayName: Select the logic app for deployment
     type: string
     default: ""
@@ -29,7 +29,7 @@ stages:
     steps:
     
     - script: |
-        # if [ -z "$(LogicApp)" ]; then
+        # if [ -z "$(logicapp)" ]; then
         #   echo "Error: 'logic app' parameter is required."
         #   exit 1
         # fi
