@@ -4,6 +4,7 @@
   "parameters": {
     "logicAppName": {
       "type": "string",
+      "defaultValue": "templogicapp",
       "metadata": {
         "description": "The logic app name"
       }

@@ -184,7 +184,7 @@ Function Set-LogicAppDeployment {
     Set-ResourceGroup -resourceGroupName $resourceGroupName;
 
     $armParameters = @{
-        logicAppName = $logicAppName
+        logicAppName =$logicAppName
         groupId      = $groupId
         environment  = $environment
         locationName = $abbrevLocationName

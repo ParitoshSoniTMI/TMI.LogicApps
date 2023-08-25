@@ -15,8 +15,7 @@ parameters:
       - "logic1"
       - "logic2"
 
-trigger:
-- main
+trigger: none
 
 stages:
 - stage: Development
