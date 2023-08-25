@@ -8,12 +8,13 @@ variables:
   sharedResourceGroupIdentifier: shared
 parameters:
   - name: LogicApp
-    type: string
-    default: "SS"
-    values: 
-    - "logic1"
-    - "logic2"
     displayName: Select the logic app for deployment
+    type: string
+    default: ""
+    values: 
+      - "logic1"
+      - "logic2"
+
 trigger:
 - main
 
@@ -28,6 +29,10 @@ stages:
     steps:
     
     - script: |
+        if [ -z "$(LogicApp)" ]; then
+          echo "Error: 'logic app' parameter is required."
+          exit 1
+        fi
         $valueMap = @{
           'logic1' = 'logic-app-definition1'
           'logic2' = 'logic-app-definition2'
@@ -41,8 +46,8 @@ stages:
         echo ##vso[task.setvariable variable=logicAppDefinitionParametersFilePath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\$(associatedValue)-parameters.json
     - script: |
         echo ##vso[task.setvariable variable=resourceGroupName]$(groupId)$(environment)rgp$(location)-$(sharedResourceGroupIdentifier)
-        echo ##vso[task.setvariable variable=templateFilePath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\shared-template.json
-        echo ##vso[task.setvariable variable=logicAppDeployScript]$(Build.Repository.LocalPath)\$(sampleDirectory)\powershell\logic-app-deploy.ps1
+        echo ##vso[task.setvariable variable=templateFilePath]$(Build.Repository.LocalPath)\templates\shared-template.json
+        echo ##vso[task.setvariable variable=logicAppDeployScript]$(Build.Repository.LocalPath)\powershell\logic-app-deploy.ps1
       name: setDynamicVariableNames
     - powershell: |
         Write-Host "definitionFilePath: $(logicAppDefinitionPath)"
@@ -50,6 +55,7 @@ stages:
         Write-Host "templateFilePath: $(templateFilePath)"
         Write-Host "resourceGroupName: $(resourceGroupName)"
         Write-Host "logicAppDeployScript: $(logicAppDeployScript)"
+        Get-ChildItem -Path $(System.DefaultWorkingDirectory)
       name: printOutVariables
     - task: AzureResourceGroupDeployment@2
       name: SharedResourcesDeployment
