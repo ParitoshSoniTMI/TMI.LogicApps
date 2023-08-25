@@ -1,6 +1,6 @@
 variables: 
   location: westus
-  groupId: cse01
+  groupId: logapp
   abbrevLocationName: westus
   instanceCount: 1
   identifier: sample-sb-conn
@@ -15,7 +15,7 @@ stages:
   jobs:
   - job: DeployDevelopmentEnvironment
     variables:
-      environment: d
+      environment: dev
     pool: 
       vmImage: 'windows-2019'
     steps:
@@ -32,7 +32,7 @@ stages:
     - task: AzureResourceGroupDeployment@2
       name: SharedResourcesDeployment
       inputs:
-        azureSubscription: 'Azure Samples Subscription'
+        azureSubscription: 'Pay-As-You-Go (TMI Dev/Test) (855cfd52-2f2f-4a84-b698-8d8a995bd70f)'
         action: 'Create Or Update Resource Group'
         resourceGroupName: $(resourceGroupName)
         location: $(location)
@@ -49,7 +49,7 @@ stages:
     - task: AzurePowerShell@4
       name: DeployLogicAppSample
       inputs:
-        azureSubscription: 'Azure Samples Subscription'
+        azureSubscription: 'Pay-As-You-Go (TMI Dev/Test) (855cfd52-2f2f-4a84-b698-8d8a995bd70f)'
         ScriptType: 'FilePath'
         ScriptPath: '$(logicAppDeployScript)'
         FailOnStandardError: true
