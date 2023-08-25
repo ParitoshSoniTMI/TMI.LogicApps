@@ -30,15 +30,21 @@ stages:
     
     - script: |
        
-        $valueMap = @{
-          'logic1' = 'logic-app-definition1'
-          'logic2' = 'logic-app-definition2'
-        }
+       setlocal enabledelayedexpansion
 
-        $selectedValue = "$(LogicApp)"
-        $associatedValue = $valueMap[$selectedValue]
-        echo "Selected LogicApp: $selectedValue"
-        echo "Associated value: $associatedValue"
+        set "valueMap[logic1]=logic-app-definition1"
+        set "valueMap[logic2]=logic-app-definition2"
+
+        set "selectedValue=%logicapp%"
+        set "associatedValue=!valueMap[%selectedValue%]!"
+
+        if "!associatedValue!"=="" (
+          echo Error: Invalid 'logicapp' parameter value.
+          exit /b 1
+        )
+
+        echo Selected environment: %selectedValue%
+        echo Associated value: %associatedValue%
         echo ##vso[task.setvariable variable=logicAppDefinitionPath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\$(associatedValue).json
         echo ##vso[task.setvariable variable=logicAppDefinitionParametersFilePath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\$(associatedValue)-parameters.json
     - script: |
