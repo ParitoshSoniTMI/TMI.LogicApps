@@ -8,7 +8,7 @@ variables:
   sharedResourceGroupIdentifier: shared
 
 trigger:
-- master
+- main
 
 stages:
 - stage: Development
