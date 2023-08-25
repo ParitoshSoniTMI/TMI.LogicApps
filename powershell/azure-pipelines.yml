@@ -47,8 +47,8 @@ stages:
         echo Selected environment: %selectedValue%
         echo Associated value: %associatedValue%
         echo ##vso[task.setvariable variable=logicAppName]%associatedValue%
-        echo ##vso[task.setvariable variable=logicAppDefinitionPath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\%associatedValue%.json
-        echo ##vso[task.setvariable variable=logicAppDefinitionParametersFilePath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\%associatedValue%-parameters.json
+        echo ##vso[task.setvariable variable=logicAppDefinitionPath]$(Build.Repository.LocalPath)\templates\%associatedValue%.json
+        echo ##vso[task.setvariable variable=logicAppDefinitionParametersFilePath]$(Build.Repository.LocalPath)\templates\%associatedValue%-parameters.json
     - script: |
         echo ##vso[task.setvariable variable=resourceGroupName]$(groupId)$(environment)rgp$(location)-$(sharedResourceGroupIdentifier)
         echo ##vso[task.setvariable variable=templateFilePath]$(Build.Repository.LocalPath)\templates\shared-template.json
@@ -77,8 +77,8 @@ stages:
     - script: |
         echo ##vso[task.setvariable variable=connectorsTemplateFilePath]$(Build.Repository.LocalPath)\templates\connectors-template.json
         echo ##vso[task.setvariable variable=logicAppTemplateFilePath]$(Build.Repository.LocalPath)\templates\logic-app-template.json
-      # echo ##vso[task.setvariable variable=logicAppDefinitionPath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\logic-app-definition.json
-      # echo ##vso[task.setvariable variable=logicAppDefinitionParametersFilePath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\logic-app-definition-parameters.json
+      # echo ##vso[task.setvariable variable=logicAppDefinitionPath]$(Build.Repository.LocalPath)\templates\logic-app-definition.json
+      # echo ##vso[task.setvariable variable=logicAppDefinitionParametersFilePath]$(Build.Repository.LocalPath)\templates\logic-app-definition-parameters.json
     - task: AzurePowerShell@4
       name: DeployLogicAppSample
       inputs:
