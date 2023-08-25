@@ -36,9 +36,9 @@ stages:
         set "valueMap[logic2]=logic-app-definition2"
         echo "value map set"
         echo ${{ parameters.logicapp }}
-        set "selectedValue=%${{ parameters.logicapp }}%"
+        set "selectedValue=${{ parameters.logicapp }}"
         echo Associated value: %associatedValue%
-        set "associatedValue=!valueMap[%selectedValue%]!"
+        set "associatedValue=!valueMap[selectedValue]!"
         echo Selected environment: %selectedValue%
         if "!associatedValue!"=="" (
           echo Error: Invalid 'logicapp' parameter value.
