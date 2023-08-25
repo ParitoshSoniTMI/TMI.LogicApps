@@ -286,6 +286,10 @@ Function New-ResourceManagerTemplateDeployment {
     }
     else {
         Write-Host "Starting deployment...";
+        Write-Host "templateFilePath: '$templateFilePath ";
+        foreach ($key in $armParameters.Keys) {
+            Write-Host "Key : '$Key' And Value : '$armParameters[$key]'"  
+        }
         return New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $deploymentName -TemplateFile $templateFilePath -TemplateParameterObject $armParameters;
     }
 }
@@ -328,7 +332,7 @@ Function Set-LogicAppResource {
 
     # If the "overrideExisting" parameter is set to true, always create a new deployment, whether or not the logic app exists.
     if($overrideExisting -eq $True){
-        Write-Host "Deploying Azure Resource Manager template for logic app"
+        Write-Host "Deploying Azure Resource Manager template for logic app: '$logicAppName'"
         $outputs = New-ResourceManagerTemplateDeployment -parametersFilePath $logicAppParametersFilePath `
             -templateFilePath $logicAppTemplateFilePath `
             -resourceGroupName $resourceGroupName `
