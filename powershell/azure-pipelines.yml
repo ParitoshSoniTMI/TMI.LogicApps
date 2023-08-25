@@ -6,7 +6,14 @@ variables:
   identifier: sample-sb-conn
   sampleDirectory: tmi.logicapps
   sharedResourceGroupIdentifier: shared
-
+parameters:
+  - name: LogicApp
+    type: string
+    default: "SS"
+    values: 
+    - "logic1"
+    - "logic2"
+    displayName: Select the logic app for deployment
 trigger:
 - main
 
@@ -19,12 +26,27 @@ stages:
     pool: 
       vmImage: 'windows-2019'
     steps:
+    
+    - script: |
+        $valueMap = @{
+          'logic1' = 'logic-app-definition1'
+          'logic2' = 'logic-app-definition2'
+        }
+
+        $selectedValue = "$(LogicApp)"
+        $associatedValue = $valueMap[$selectedValue]
+        echo "Selected LogicApp: $selectedValue"
+        echo "Associated value: $associatedValue"
+        echo ##vso[task.setvariable variable=logicAppDefinitionPath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\$(associatedValue).json
+        echo ##vso[task.setvariable variable=logicAppDefinitionParametersFilePath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\$(associatedValue)-parameters.json
     - script: |
         echo ##vso[task.setvariable variable=resourceGroupName]$(groupId)$(environment)rgp$(location)-$(sharedResourceGroupIdentifier)
         echo ##vso[task.setvariable variable=templateFilePath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\shared-template.json
         echo ##vso[task.setvariable variable=logicAppDeployScript]$(Build.Repository.LocalPath)\$(sampleDirectory)\powershell\logic-app-deploy.ps1
       name: setDynamicVariableNames
     - powershell: |
+        Write-Host "definitionFilePath: $(logicAppDefinitionPath)"
+        Write-Host "definitionParamFilePath: $(logicAppDefinitionParametersFilePath)"
         Write-Host "templateFilePath: $(templateFilePath)"
         Write-Host "resourceGroupName: $(resourceGroupName)"
         Write-Host "logicAppDeployScript: $(logicAppDeployScript)"
@@ -44,8 +66,8 @@ stages:
     - script: |
         echo ##vso[task.setvariable variable=connectorsTemplateFilePath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\connectors-template.json
         echo ##vso[task.setvariable variable=logicAppTemplateFilePath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\logic-app-template.json
-        echo ##vso[task.setvariable variable=logicAppDefinitionPath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\logic-app-definition.json
-        echo ##vso[task.setvariable variable=logicAppDefinitionParametersFilePath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\logic-app-definition-parameters.json
+      # echo ##vso[task.setvariable variable=logicAppDefinitionPath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\logic-app-definition.json
+      # echo ##vso[task.setvariable variable=logicAppDefinitionParametersFilePath]$(Build.Repository.LocalPath)\$(sampleDirectory)\templates\logic-app-definition-parameters.json
     - task: AzurePowerShell@4
       name: DeployLogicAppSample
       inputs:
