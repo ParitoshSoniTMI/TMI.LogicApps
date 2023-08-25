@@ -200,7 +200,7 @@ Function Set-LogicAppDeployment {
 
     $logicAppResource = Set-LogicAppResource `
         -resourceGroupName $resourceGroupName `
-        -logicAppName $connectorsOutput.Outputs.logicAppName.Value`
+        -logicAppName $logicAppName #$connectorsOutput.Outputs.logicAppName.Value`
         -armParameters $armParameters;
     
     Write-Host "Updating token values with output values"

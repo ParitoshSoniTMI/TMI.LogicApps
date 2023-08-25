@@ -2,6 +2,12 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "logicAppName": {
+      "type": "string",
+      "metadata": {
+        "description": "The logic app name"
+      }
+    },
     "groupId": {
       "type": "string",
       "metadata": {
@@ -44,8 +50,7 @@
     "baseConnectionsId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/', variables('location'), '/managedApis/')]",
     "serviceBusConnectionName": "servicebus",
     "serviceBusConnectionId": "[concat(variables('baseConnectionsId'), 'servicebus')]",
-    "instance": "[if(equals(parameters('instance'), 1), '', concat('-', sub(parameters('instance'), 1)))]",
-    "logicAppName": "[toLower(concat(variables('baseName'), 'la', parameters('locationName'), '-', parameters('identifier'), variables('instance')))]"
+    "instance": "[if(equals(parameters('instance'), 1), '', concat('-', sub(parameters('instance'), 1)))]"
   },
   "resources": [
     {
@@ -102,7 +107,7 @@
     },
     "logicAppName": {
       "type": "string",
-      "value": "[variables('logicAppName')]"
+      "value": "[parameters('logicAppName')]"
     }
   }
 }
