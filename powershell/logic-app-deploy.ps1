@@ -109,7 +109,7 @@ param(
 
     [Parameter(Mandatory = $False)]
     [string]
-    $logicAppDefinitionPath = "../templates/logic-app-definition.json",
+    $logicAppDefinitionPath = "/templates/logic-app-definition.json",
 
     [Parameter(Mandatory = $False)]
     [int]
