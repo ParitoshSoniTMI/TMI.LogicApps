@@ -37,7 +37,7 @@ stages:
         resourceGroupName: $(resourceGroupName)
         location: $(location)
         templateLocation: Linked artifact
-        csmFile: $(templateFilePath)
+        csmFile: $(System.DefaultWorkingDirectory)/$(sampleDirectory)/templates/shared-template.json
         deploymentMode: 'Incremental'
         deploymentName: $(Build.BuildNumber)
         overrideParameters: -groupId $(groupId) -environment $(environment) -locationName $(abbrevLocationName)
