@@ -29,10 +29,7 @@ stages:
     steps:
     
     - script: |
-        # if [ -z "$(logicapp)" ]; then
-        #   echo "Error: 'logic app' parameter is required."
-        #   exit 1
-        # fi
+       
         $valueMap = @{
           'logic1' = 'logic-app-definition1'
           'logic2' = 'logic-app-definition2'
