@@ -61,6 +61,10 @@
 param(
     [Parameter(Mandatory = $True)]
     [string]
+    $logicAppName,
+
+    [Parameter(Mandatory = $True)]
+    [string]
     $groupId,
 
     [Parameter(Mandatory = $True)]
@@ -180,6 +184,7 @@ Function Set-LogicAppDeployment {
     Set-ResourceGroup -resourceGroupName $resourceGroupName;
 
     $armParameters = @{
+        logicAppName = $logicAppName
         groupId      = $groupId
         environment  = $environment
         locationName = $abbrevLocationName
