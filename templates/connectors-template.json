@@ -106,7 +106,7 @@
         "displayName": "[variables('office365ConnectionDisplayName')]",
         "customParameterValues": {},
         "api": {
-          "id": "[concat('/subscriptions/subscription().subscriptionId/providers/Microsoft.Web/locations/resourceGroup().location/managedApis/', concat(variables('office365ConnectionName'), '-1'))]",
+          "id": "[concat('/subscriptions/subscription().Id/providers/Microsoft.Web/locations/resourceGroup().location/managedApis/', concat(variables('office365ConnectionName'), '-1'))]",
           "type": "Microsoft.Web/locations/managedApis",
           "displayName": "Office 365 Outlook"
         },
