@@ -53,6 +53,7 @@
     "office365ConnectionName": "office365-test",
     "office365ConnectionDisplayName": "Paritosh.Soni@trafficmanagement.com",
     "serviceBusConnectionId": "[concat(variables('baseConnectionsId'), 'servicebus')]",
+    "office365ConnectionId": "[concat(variables('baseConnectionsId'), 'variables('office365ConnectionName'))]",
     "instance": "[if(equals(parameters('instance'), 1), '', concat('-', sub(parameters('instance'), 1)))]"
   },
   "resources": [
@@ -106,7 +107,7 @@
         "displayName": "[variables('office365ConnectionDisplayName')]",
         "customParameterValues": {},
         "api": {
-          "id": "[concat('/subscriptions/subscription().Id/providers/Microsoft.Web/locations/resourceGroup().location/managedApis/', concat(variables('office365ConnectionName'), '-1'))]",
+          "id": "[variables('office365ConnectionId')]",
           "type": "Microsoft.Web/locations/managedApis",
           "displayName": "Office 365 Outlook"
         },
@@ -135,7 +136,7 @@
     },
     "office365ManagedApiId": {
         "type": "string",
-        "value": "[reference(resourceId('Microsoft.Web/connections', concat(variables('office365ConnectionName'), '-1')), '2016-06-01').properties.api.id]"
+        "value": "[variables('office365ConnectionId')]"
     },
     "logicAppName": {
       "type": "string",
