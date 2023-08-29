@@ -13,7 +13,7 @@
             },
             "office365_1": {
                 "connectionId": "{office365ConnId}",
-                "connectionName": "office365-4",
+                "connectionName": "office365-test-1",
                 "id": "{office365ManagedApiId}"
             }
         }
