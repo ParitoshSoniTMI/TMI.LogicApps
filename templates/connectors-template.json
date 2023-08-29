@@ -53,7 +53,7 @@
     "office365ConnectionName": "office365-test",
     "office365ConnectionDisplayName": "Paritosh.Soni@trafficmanagement.com",
     "serviceBusConnectionId": "[concat(variables('baseConnectionsId'), 'servicebus')]",
-    "office365ConnectionId": "[concat(variables('baseConnectionsId'), 'variables('office365ConnectionName'))]",
+    "office365ConnectionId": "[concat(variables('baseConnectionsId'), variables('office365ConnectionName'))]",
     "instance": "[if(equals(parameters('instance'), 1), '', concat('-', sub(parameters('instance'), 1)))]"
   },
   "resources": [
