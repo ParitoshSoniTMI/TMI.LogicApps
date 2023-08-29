@@ -10,6 +10,11 @@
                 "connectionId": "{serviceBusConnId2}",
                 "connectionName": "servicebus-2",
                 "id": "{serviceBusManagedApiId}"
+            },
+            "office365_1": {
+                "connectionId": "{office365ConnId}",
+                "connectionName": "office365-4",
+                "id": "{office365ManagedApiId}"
             }
         }
     }
