@@ -50,7 +50,7 @@
     "serviceBusAuthRuleId": "[resourceId(subscription().subscriptionId, variables('sharedResourceGroupName'), 'Microsoft.ServiceBus/namespaces/authorizationRules', variables('servicesBusName'), 'RootManageSharedAccessKey')]",
     "baseConnectionsId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/', variables('location'), '/managedApis/')]",
     "serviceBusConnectionName": "servicebus",
-    "office365ConnectionName": "office365-test",
+    "office365ConnectionName": "office365-test-1",
     "office365ConnectionDisplayName": "Paritosh.Soni@trafficmanagement.com",
     "serviceBusConnectionId": "[concat(variables('baseConnectionsId'), 'servicebus')]",
     "office365ConnectionId": "[concat(variables('baseConnectionsId'), variables('office365ConnectionName'))]",
