@@ -132,7 +132,7 @@
     },
     "office365ConnId": {
         "type": "string",
-        "value": "[resourceId('Microsoft.Web/connections', variables('office365ConnectionName')]"
+        "value": "[resourceId('Microsoft.Web/connections', variables('office365ConnectionName'))]"
     },
     "office365ManagedApiId": {
         "type": "string",
