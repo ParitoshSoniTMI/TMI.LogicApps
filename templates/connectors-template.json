@@ -51,7 +51,7 @@
     "baseConnectionsId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/', variables('location'), '/managedApis/')]",
     "serviceBusConnectionName": "servicebus",
     "office365ConnectionName": "office365-test-1",
-    "office365ConnectionDisplayName": "office365",
+    "office365ConnectionDisplayName": "Paritosh.Soni@trafficmanagement.com",
     "serviceBusConnectionId": "[concat(variables('baseConnectionsId'), 'servicebus')]",
     "office365ConnectionId": "[concat(variables('baseConnectionsId'), variables('office365ConnectionName'))]",
     "instance": "[if(equals(parameters('instance'), 1), '', concat('-', sub(parameters('instance'), 1)))]"
@@ -106,7 +106,7 @@
       "properties": {
         "displayName": "[variables('office365ConnectionDisplayName')]",
         "api": {
-          "id": "[variables('office365ConnectionId')]",
+          "id": "[subscriptionResourceId('Microsoft.Web/locations/managedApis', parameters('location'), 'office365')]",
           "displayName": "Office 365 Outlook"
         }
       }
